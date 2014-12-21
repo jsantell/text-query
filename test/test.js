@@ -44,4 +44,46 @@ describe("simple query", function () {
     expect(q.matches("cats beast cupcake wars")).to.be.equal(false);
     expect(q.matches("beast champions cats")).to.be.equal(false);
   });
+
+  it("handles undefined, null values", function () {
+    var q = new Query("null");
+    expect(q.matches("null")).to.be.equal(true);
+    expect(q.matches([null, undefined])).to.be.equal(false);
+    expect(q.matches(null)).to.be.equal(false);
+  });
+
+  it("returns true for empty query strings", function () {
+    var q = new Query("");
+    expect(q.matches("anything")).to.be.equal(true);
+    expect(q.matches(["ohh yeah"])).to.be.equal(true);
+    expect(q.matches("anything")).to.be.equal(true);
+    expect(q.matches(["ohh yeah"])).to.be.equal(true);
+  });
+});
+
+describe("comparators", function () {
+  it("takes custom function for comparator", function () {
+    var q = new Query("cats dogs");
+    expect(q.matches("CATS", compare)).to.be.equal(true);
+    expect(q.matches("cats", compare)).to.be.equal(true);
+    expect(q.matches("wahoo", compare)).to.be.equal(false);
+
+    function compare (token, text) {
+      return !!~(text.toLowerCase()).indexOf(token);
+    }
+  });
+});
+
+describe("array fields", function () {
+  it("takes an array of strings to be queried against", function () {
+    var q = new Query("cats dogs");
+    expect(q.matches(["fish", "cats"])).to.be.equal(true);
+    expect(q.matches(["fish", "rocks"])).to.be.equal(false);
+  });
+
+  it("filters out undefined elements", function () {
+    var q = new Query("cats dogs");
+    expect(q.matches(["fish", "cats", null, undefined])).to.be.equal(true);
+    expect(q.matches(["fish", "rocks", null, undefined])).to.be.equal(false);
+  });
 });

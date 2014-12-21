@@ -22,6 +22,8 @@ q.matches("death metal for finnish bassists"); // true
 q.matches("death to swedish metal drums"); // false, 'death metal' is not a single string
 q.matches("norwegian death metal for guitarists"); // false, missing 'swedish' or 'finnish'
 
+// Can also handle arrays of strings for matching
+q.matches(["death metal", "swedish", "guitar"]); // true
 ```
 
 ## Installation
@@ -36,7 +38,7 @@ Creates a new Query object with `query` string.
 
 ### query.matches(text)
 
-Returns a boolean indicating whether or not `text` matches the internal `query`.
+Returns a boolean indicating whether or not `text` matches the internal `query`. `text` can also be an array of strings.
 
 ## Testing
 
