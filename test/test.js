@@ -59,6 +59,11 @@ describe("simple query", function () {
     expect(q.matches("anything")).to.be.equal(true);
     expect(q.matches(["ohh yeah"])).to.be.equal(true);
   });
+
+  it("handles dangling commas", function () {
+    var q = new Query("metal, cloudkicker,");
+    expect(q.matches("metal cloudkicker")).to.be.equal(true);
+  });
 });
 
 describe("comparators", function () {

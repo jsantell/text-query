@@ -81,7 +81,9 @@ function tokenize (text) {
                       .map(function (s) { return s.trim(); });
 
   // Take each conjunction string and split it into OR groups
-  return conjunction.map(function (s) {
+  return conjunction.filter(function (s) {
+    return s !== "";
+  }).map(function (s) {
     s = s.replace(/'/g,'"') // normalize all quotes to double quotes
     return disjunctionTokenizer(s);
   });
