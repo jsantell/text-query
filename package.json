@@ -1,0 +1,23 @@
+{
+  "name": "text-query",
+  "version": "1.0.0",
+  "description": "Generate simple boolean text queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec --ui bdd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jsantell/text-query.git"
+  },
+  "author": "Jordan Santell",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/jsantell/text-query/issues"
+  },
+  "homepage": "https://github.com/jsantell/text-query",
+  "devDependencies": {
+    "mocha": "^2.0.1",
+    "chai": "^1.10.0"
+  }
+}
